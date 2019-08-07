@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>KasiChat</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+
+    <div id="appContainer" class="flexColumn">
+
+        <header>
+            <div class="container flexColumn flexCenter">
+                <h1>KasiChat</h1>
+                <p class="lightText textCenter">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+            </div>
+        </header>
+
+        <div id="mainContent" class="container flexGrow_1 flexColumn">
+            <section id="loginWindow" class="">
+                <h2 class="textCenter">Get Started</h2>
+                <form id="loginForm" class="flex">
+                    <input type="text" name="username" id="usernameInput" placeholder="Username" class="flexGrow_1">
+                    <button id="loginBtn">Chat !</button>
+                </form>
+            </section>
+
+            <section id="chat" class="hidden flexGrow_1 flexColumn">
+                <div id="messageList" class="messageList">  
+                </div>
+
+                <form id="messageForm" class="flex">
+                    <input class="flexGrow_1" type="text" name="message" id="messageInput" placeholder="enter a message">
+                    <button id="sendBtn">Send</button>
+                </form>
+
+            </section>
+        </div>
+    </div>
+    
+    <!-- Socket IO -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.4/socket.io.js"></script>
+    <!-- Javascript -->
+    <script src="app.js"></script>
+</body>
+
+</html>

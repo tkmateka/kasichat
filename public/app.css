@@ -1,0 +1,190 @@
+/* Variables */
+
+:root {
+    --primaryColor: black;
+    --secondaryColor: darkslategray;
+    --primaryBackground: lightsteelblue;
+    --lightPurple: aliceblue;
+}
+
+/* Resets */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Helvetica, sans-serif;
+    color: var(--primaryColor);
+}
+
+/* Helper Classes */
+
+/* Layout/Flexbox */
+
+.flex {
+    display: flex;
+}
+.flexCenter {
+    justify-content: center;
+    align-items: center;
+}
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+}
+.flexGrow_1 {
+    flex-grow: 1;
+}
+.flexSpaceBetween {
+    flex: 1 1 auto;
+}
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+.hidden {
+    display: none;
+}
+.marginBottom_2 {
+    margin-bottom: 20px;
+}
+
+
+/* Text Classes */
+
+.primaryText {
+    color: var(--primaryColor);
+}
+.secondaryText {
+    color: var(--secondaryColor);
+}
+.lightText {
+    color: var(--lightPurple);
+}
+.textCenter {
+    text-align: center;
+}
+h1 {
+    font-size: 48px;
+    font-weight: 300;
+}
+
+#appContainer {
+    height: 100vh;
+    width: 100vw;
+	align-items: stretch;
+    background-color: var(--primaryColor);
+    overflow: hidden;
+}
+#mainContent {
+    width: 100%;
+    justify-content: center;
+    height: 78%;
+}
+
+/* Header */
+header {
+    height: 100px;
+    background-color: var(--primaryColor);
+    width: 100%;
+    color: var(--primaryBackground);
+}
+
+header .container {
+    height: 100%;
+    align-items: left;
+}
+
+
+/* Login */
+#loginWindow {
+    background: var(--primaryBackground);
+    padding: 40px 25px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    margin-top: -100px;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+#loginForm {
+    margin-top: 20px;
+}
+
+/* Form Elements */
+input {
+    width: 100%;
+    height: 40px;
+    padding: 0 15px;
+    background-color: var(--lightPurple);
+    border: none;
+    color: var(--primaryColor);
+}
+button {
+    min-width: 25%;
+    height: 40px;
+    padding: 0 15px;
+    background-color: var(--primaryColor);
+    color: var(--primaryBackground);
+    border: none;
+}
+
+/* Chat Section */
+#chat {
+    background-color: var(--primaryBackground);
+    margin: 5% 0;;
+    padding: 15px;
+    color: var(--primaryBackground);
+    overflow-y: scroll;
+}
+.messageForm {
+    margin-bottom: 25px;
+}
+.message {
+    background-color: var(--primaryColor);
+    padding: 20px;
+    width: 80%;
+    margin-bottom: 20px;
+    border-radius: 20px;
+}
+.messageRight {
+    background-color: var(--lightPurple);
+    color: var(--primaryColor);
+    margin-left: 20%;
+}
+.messageRight .messageDate {
+    color: var(--primaryColor);
+}
+.messageDetails {
+    margin-bottom: 5px;
+}
+.messageAuthor {
+    font-weight: 800;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.messageDate {
+    font-weight: 100;
+    font-size: 14px;
+    width: 45%;
+    text-align: right;
+}
+.messageContent {
+    font-weight: 100;
+}
+.messageList {
+    height: 100%;
+    overflow: scroll;
+}
+
+/* Hide scroll */
+::-webkit-scrollbar {
+    width: 0px;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: transparent;
+}
