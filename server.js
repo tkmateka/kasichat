@@ -4,6 +4,8 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const path = require('path');
 
+const PORT = process.env.PORT || 3000;
+
 // Serve the PUBLIC directory
 app.use(express.static(path.resolve(__dirname, 'public')));
 
@@ -26,8 +28,8 @@ io.on('connection', socket => {
     });
 });
 
-http.listen(3000, () => {
-    console.log('listening on port 3000');
+http.listen(PORT, () => {
+    console.log(`listening on port ${PORT}`);
 })
 
 
