@@ -135,21 +135,46 @@ button {
 #displayContainer {
     width: 100%;
 }
-
-/* User Section */
-#users {
-    width: 37%;
-    display: inline-block;
-    vertical-align: top;
+.displayConfig {
     background-color: var(--primaryBackground);
     padding: 15px;
     color: var(--primaryBackground);
     overflow-y: scroll;
+    height: 65vh;
+}
+
+/* User Section */
+#user {
+    height: 3em;
+    font-size: 2em;
+    color: black;
+    width: 100%;
+}
+
+#users {
+    width: 37%;
+    display: inline-block;
+    vertical-align: top;
     margin-right: 2%;
 }
 
-#user {
-    height: 3em;
+.userImage {
+    width: 30%;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5%;
+}
+
+.userImage img {
+    width: 85%;
+    border-radius: 50%;
+}
+
+.userDetails {
+    width: 60%;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: smaller;
 }
 
 /* Chat Section */
@@ -157,11 +182,6 @@ button {
     width: 60%;
     display: inline-block;
     vertical-align: top;
-    background-color: var(--primaryBackground);
-    padding: 15px;
-    color: var(--primaryBackground);
-    overflow-y: scroll;
-    height: 65vh;
 }
 .messageForm {
     margin-bottom: 25px;

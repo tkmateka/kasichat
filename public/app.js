@@ -6,6 +6,7 @@ const chatWindow = document.getElementById('chat');
 const messageList = document.getElementById('messageList');
 const messageInput = document.getElementById('messageInput');
 const sendBtn = document.getElementById('sendBtn');
+const friends = document.getElementById('userContainer');
 
 // Login Stuff
 let username = '';
@@ -20,7 +21,43 @@ const messages = []; // {author, data, content, type}
 // Socket IO
 var socket = io();
 
-// socket.on('login', user);
+// Get users
+socket.on('users', (users) => {
+
+    friends.innerHTML = '';
+
+    // Filter
+    function removeDuplicates(users, prop) {
+        let newArray = [];
+        let lookupObject = {};
+
+        for (let i in users) {
+            lookupObject[users[i][prop]] = users[i];
+        }
+
+        for (i in lookupObject) {
+            newArray.push(lookupObject[i]);
+        }
+        return newArray;
+    }
+
+    // Loop
+    for (let user of removeDuplicates(users, "name")) {
+        console.log(username, 'User name');
+        // Friends Info
+        friends.innerHTML += `
+            <div id="user" class="${user.name === username ? 'hidden' : ''}">
+                <div class="userImage">
+                    <img id="friendImg" src="${user.image}" alt="Pro Pic">
+                </div>
+                <div class="userDetails">
+                    <p id="friendName"><b>${user.name}</b></p>
+                    <p id="friendEmail"><b>${user.email}</b></p>
+                </div>
+            </div>
+        `
+    }
+})
 
 // Handle incoming messages
 socket.on('message', message => {
@@ -38,11 +75,6 @@ socket.on('message', message => {
     chatWindow.scrollTop = chatWindow.scrollHeight;
 });
 
-// // Send Message Function
-// const sendMessage = message => {
-//     socket.emit('message', message);
-// }
-
 // Login Button Callback
 loginBtn.addEventListener('click', e => {
     // Prevent form default
@@ -59,18 +91,18 @@ loginBtn.addEventListener('click', e => {
         name: username,
         email: 'user@gmail.com',
         gender: 'male',
-        image: 'iamge.png'
+        image: '/assets/proPic.jpg'
     }
 
     // Handle login
-    socket.emit('login', user, function(isUnique) {
+    socket.emit('login', user, function (isUnique) {
         console.log(isUnique, 'isUnique');
-    
+
         if (isUnique) {
             // Hide Login and show chat
             loginWindow.classList.add('hidden');
             displayContainer.classList.remove('hidden');
-    
+
             // Clear Input
             usernameInput.value = '';
         } else {
@@ -126,6 +158,7 @@ const createMessageHTML = (message) => {
     `;
 }
 
+// Display Messgages
 const displayMessages = () => {
     const messageHTML = messages
         .map((message) => createMessageHTML(message))
