@@ -5,6 +5,7 @@
     --secondaryColor: darkslategray;
     --primaryBackground: lightsteelblue;
     --lightPurple: aliceblue;
+    --errorMessage: red;
 }
 
 /* Resets */
@@ -41,7 +42,7 @@ body {
     flex: 1 1 auto;
 }
 .container {
-    max-width: 600px;
+    padding: 2em;
     margin: 0 auto;
 }
 .hidden {
@@ -81,7 +82,7 @@ h1 {
 #mainContent {
     width: 100%;
     justify-content: center;
-    height: 78%;
+    height: calc(100% - 100px);
 }
 
 /* Header */
@@ -104,7 +105,7 @@ header .container {
     padding: 40px 25px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     margin-top: -100px;
-    width: 95%;
+    width: 70%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -115,7 +116,7 @@ header .container {
 /* Form Elements */
 input {
     width: 100%;
-    height: 40px;
+    height: 55px;
     padding: 0 15px;
     background-color: var(--lightPurple);
     border: none;
@@ -123,20 +124,44 @@ input {
 }
 button {
     min-width: 25%;
-    height: 40px;
+    height: 55px;
     padding: 0 15px;
     background-color: var(--primaryColor);
     color: var(--primaryBackground);
     border: none;
 }
 
-/* Chat Section */
-#chat {
+/* Display Section */
+#displayContainer {
+    width: 100%;
+}
+
+/* User Section */
+#users {
+    width: 37%;
+    display: inline-block;
+    vertical-align: top;
     background-color: var(--primaryBackground);
-    margin: 5% 0;;
     padding: 15px;
     color: var(--primaryBackground);
     overflow-y: scroll;
+    margin-right: 2%;
+}
+
+#user {
+    height: 3em;
+}
+
+/* Chat Section */
+#chat {
+    width: 60%;
+    display: inline-block;
+    vertical-align: top;
+    background-color: var(--primaryBackground);
+    padding: 15px;
+    color: var(--primaryBackground);
+    overflow-y: scroll;
+    height: 65vh;
 }
 .messageForm {
     margin-bottom: 25px;
@@ -175,8 +200,14 @@ button {
     font-weight: 100;
 }
 .messageList {
-    height: 100%;
+    height: calc(100% - 55px);
     overflow: scroll;
+}
+
+#errorMessage {
+    font-size: 10px;
+    color: var(--errorMessage);
+    margin-top: 1em;
 }
 
 /* Hide scroll */

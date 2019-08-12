@@ -16,7 +16,7 @@
         <header>
             <div class="container flexColumn flexCenter">
                 <h1>KasiChat</h1>
-                <p class="lightText textCenter">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+                <p class="lightText textCenter">Welcome to KasiChat</p>
             </div>
         </header>
 
@@ -27,21 +27,33 @@
                     <input type="text" name="username" id="usernameInput" placeholder="Username" class="flexGrow_1">
                     <button id="loginBtn">Chat !</button>
                 </form>
+
+                <p id="errorMessage" class="hidden">User name should be unique...</p>
             </section>
 
-            <section id="chat" class="hidden flexGrow_1 flexColumn">
-                <div id="messageList" class="messageList">  
-                </div>
+            <section id="displayContainer" class="hidden">
+                <!-- Users -->
+                <section id="users">
+                    <div id="user"></div>
+                </section>
 
-                <form id="messageForm" class="flex">
-                    <input class="flexGrow_1" type="text" name="message" id="messageInput" placeholder="enter a message">
-                    <button id="sendBtn">Send</button>
-                </form>
+                <!-- Chat -->
+                <section id="chat" class="flexGrow_1 flexColumn">
+                    <div id="messageList" class="messageList">
+                    </div>
 
+                    <form id="messageForm" class="flex">
+                        <input class="flexGrow_1" type="text" name="message" id="messageInput"
+                            placeholder="enter a message">
+                        <button id="sendBtn">Send</button>
+                    </form>
+
+                </section>
             </section>
+
         </div>
     </div>
-    
+
     <!-- Socket IO -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.4/socket.io.js"></script>
     <!-- Javascript -->

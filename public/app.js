@@ -1,6 +1,7 @@
 const messageTypes = { LEFT: 'left', RIGHT: 'right', LOGIN: 'login' };
 
 // Chat Stuff
+const displayContainer = document.getElementById('displayContainer');
 const chatWindow = document.getElementById('chat');
 const messageList = document.getElementById('messageList');
 const messageInput = document.getElementById('messageInput');
@@ -11,17 +12,21 @@ let username = '';
 const usernameInput = document.getElementById('usernameInput');
 const loginBtn = document.getElementById('loginBtn');
 const loginWindow = document.getElementById('loginWindow');
+const errorMessage = document.getElementById('errorMessage');
 
+const users = []; // {name, email, gender, image}
 const messages = []; // {author, data, content, type}
 
 // Socket IO
 var socket = io();
 
+// socket.on('login', user);
+
 // Handle incoming messages
 socket.on('message', message => {
     console.log(message);
-    if(message.type !== messageTypes.LOGIN) {
-        if(message.author === username) {
+    if (message.type !== messageTypes.LOGIN) {
+        if (message.author === username) {
             message.type = messageTypes.RIGHT;
         } else {
             message.type = messageTypes.LEFT;
@@ -32,6 +37,75 @@ socket.on('message', message => {
     displayMessages();
     chatWindow.scrollTop = chatWindow.scrollHeight;
 });
+
+// // Send Message Function
+// const sendMessage = message => {
+//     socket.emit('message', message);
+// }
+
+// Login Button Callback
+loginBtn.addEventListener('click', e => {
+    // Prevent form default
+    e.preventDefault();
+    // Set the username and display the logged in message
+    if (!usernameInput.value) {
+        return console.log('Must supply a username')
+    }
+
+    username = usernameInput.value;
+
+    // Generate Message
+    const user = {
+        name: username,
+        email: 'user@gmail.com',
+        gender: 'male',
+        image: 'iamge.png'
+    }
+
+    // Handle login
+    socket.emit('login', user, function(isUnique) {
+        console.log(isUnique, 'isUnique');
+    
+        if (isUnique) {
+            // Hide Login and show chat
+            loginWindow.classList.add('hidden');
+            displayContainer.classList.remove('hidden');
+    
+            // Clear Input
+            usernameInput.value = '';
+        } else {
+            errorMessage.classList.remove('hidden');
+        }
+    });
+})
+
+// Send Button Callback
+sendBtn.addEventListener('click', (e) => {
+    // Prevent form default
+    e.preventDefault();
+    // Set the username and display the logged in message
+    if (!messageInput.value) {
+        return console.log('Must supply a message')
+    }
+
+    // Create date
+    const date = new Date();
+    const day = ('0' + date.getDate());
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const dateString = `${day}-${month}-${year}`;
+
+    // Generate Message
+    const message = {
+        author: username,
+        date: dateString,
+        content: messageInput.value
+    }
+
+    socket.emit('message', message);
+
+    messageInput.value = '';
+})
 
 // Take in message object, and return corresponding message HTML
 const createMessageHTML = (message) => {
@@ -61,58 +135,6 @@ const displayMessages = () => {
 }
 
 displayMessages();
-
-// Send Button Callback
-sendBtn.addEventListener('click', (e) => {
-    // Prevent form default
-    e.preventDefault();
-    // Set the username and display the logged in message
-    if(!messageInput.value) {
-        return console.log('Must supply a message')
-    }
-
-    const date = new Date();
-    const day = ('0' + date.getDate());
-    const year = date.getFullYear();
-    const month = ('0' + (date.getMonth() + 1)).slice(-2);
-    const dateString = `${day}-${month}-${year}`;
-
-    const message = {
-        author: username,
-        date: dateString,
-        content: messageInput.value
-    }
-
-    socket.emit('message', message);
-
-    messageInput.value = '';
-})
-
-const sendMessage = message => {
-    socket.emit('message', message);
-}
-
-// Login Button Callback
-loginBtn.addEventListener('click', e => {
-    // Prevent form default
-    e.preventDefault();
-    // Set the username and display the logged in message
-    if(!usernameInput.value) {
-        return console.log('Must supply a username')
-    }
-    username = usernameInput.value;
-
-    sendMessage({
-        author: username,
-        type: messageTypes.LOGIN
-    });
-    // Hide Login and show chat
-    loginWindow.classList.add('hidden');
-    chatWindow.classList.remove('hidden');
-
-    usernameInput.value = '';
-
-})
 
 
 
