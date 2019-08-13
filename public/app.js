@@ -52,7 +52,7 @@ socket.on('users', (users) => {
                 </div>
                 <div class="userDetails">
                     <p id="friendName"><b>${user.name}</b></p>
-                    <p id="friendEmail"><b>${user.email}</b></p>
+                    <p id="friendEmail"><i>${user.email}</i></p>
                 </div>
             </div>
         `
