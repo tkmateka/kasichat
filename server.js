@@ -30,7 +30,7 @@ io.on('connection', socket => {
             console.log(true)
             socket.user = data;
             users.push(socket.user);
-            io.emit('users', users);
+            updateUsers();
             console.log('users', users);
         }    
     });
@@ -42,9 +42,18 @@ io.on('connection', socket => {
         io.emit('message', message);
     });
 
+    // Update users
+    function updateUsers() {
+        io.emit('users', users);
+    }
+
     // On disconnect
     socket.on('disconnect', () => {
         console.log('user disconnetced...');
+
+        if(!socket.user) return;
+        users.splice(users.indexOf(socket.user), 1);
+        updateUsers();
     });
 });
 

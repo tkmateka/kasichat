@@ -26,7 +26,7 @@ socket.on('users', (users) => {
 
     friends.innerHTML = '';
 
-    // Filter
+    // Filter Through users to find duplicate
     function removeDuplicates(users, prop) {
         let newArray = [];
         let lookupObject = {};
@@ -41,7 +41,7 @@ socket.on('users', (users) => {
         return newArray;
     }
 
-    // Loop
+    // Loop through users and display
     for (let user of removeDuplicates(users, "name")) {
         console.log(username, 'User name');
         // Friends Info
